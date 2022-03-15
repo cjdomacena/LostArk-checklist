@@ -1,10 +1,32 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import Footer from "./components/Footer";
 import Button from "./components/Button";
+import Navigation from "./components/Navigation";
 import TaskItem from "./components/TaskItem";
 export const AppContext = createContext();
 function App()
 {
+
+  const handleUpdateTime = () =>
+  {
+    return new Intl.DateTimeFormat('default', { month: 'long', weekday: 'long', day: 'numeric', hour:'numeric', minute:'numeric', second:'numeric' }).format(new Date())
+  }
+
+  const handleSave = () =>
+  {
+    const newVal = {...values}
+    newVal.lastUpdated = handleUpdateTime();
+    setValues(newVal)
+    localStorage.setItem('lostArk-todos', JSON.stringify(values))
+  }
+
+  const handleReset = () => {
+    setValues(defaultValue); 
+    localStorage.setItem('lostArk-todos', JSON.stringify(defaultValue))
+  }
+
   const defaultValue = {
+    lastUpdated: handleUpdateTime(),
     daily: {
       completed: 0,
       unaDaily: [false, false],
@@ -23,12 +45,19 @@ function App()
   }
   const [values, setValues] = useState(defaultValue)
 
-  console.log(values)
+  useEffect(() =>
+  {
+    if (localStorage.getItem('lostArk-todos'))
+    {
+      setValues(JSON.parse(localStorage.getItem('lostArk-todos')))
+    } 
+  }, [])
 
   return (
     <AppContext.Provider value={{ values, setValues }}>
-      <div className="App grid place-items-center w-full h-screen">
-        <main className="2xl:container mx-auto px-4 grid grid-cols-12">
+      <div className="App  w-full h-screen">
+        <Navigation />
+        <main className="2xl:container mx-auto px-4 grid grid-cols-12 mt-12">
           <aside className="col-span-2">
             <h2 className="my-4 text-white text-sm">Available Tasks</h2>
             <div className=" grid grid-flow-row gap-y-4">
@@ -52,14 +81,17 @@ function App()
           </aside>
           <div className=" col-start-4 col-end-13 text-white">
             <div className="flex w-full justify-between items-center">
-              <h2>My Checklist</h2>
-              <Button type="reset" click={() => setValues(defaultValue)} />
+              <h2>My Checklist <span className="text-xs text-neutral-400">Last Update: {values.lastUpdated}</span></h2>
+              <div className="gap-x-4 flex">
+                <Button type="reset" click={handleReset} />
+                <Button type="save" click={handleSave} />
+              </div>
             </div>
             <div>
               <div className="flex justify-between items-center border-b-[1px] border-b-neutral-700 my-4">
                 <h4 className="font-medium">Daily</h4>
                 <div>
-                  <p className="text-sm text-neutral-400">{values.daily.completed} of 7 completed</p>
+                  <p className="text-sm text-neutral-400">{values.daily.completed} of 8 completed</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4 font-medium">
@@ -72,7 +104,9 @@ function App()
 
                 <TaskItem type="field-boss" label="Field Boss" isCheckBox={true} isDone={values.daily.fieldBoss[0]} index={0} />
                 <TaskItem type="rapport" label="Rapport" isCheckBox={true} isDone={values.daily.rapport[0]} index={0} />
-                <TaskItem type="chaos-gate" label="Chaos Gate" isCheckBox={true} isDone={values.daily.chaosGate[0]} index={0}/>
+                <TaskItem type="chaos-gate" label="Chaos Gate" isCheckBox={true} isDone={values.daily.chaosGate[0]} index={0} />
+
+                <TaskItem type="guild-dono" label="Guild Donations" isCheckBox={true} isDone={values.daily.guildDono[0]} index={0} />
               </div>
             </div>
             <div className="mt-6">
@@ -85,11 +119,12 @@ function App()
               <div className="grid grid-cols-2 gap-4 font-medium">
                 <TaskItem type="una-weekly" label="Una&rsquo;s Weekly" isCheckBox={true} isDone={values.weekly.unaWeekly[0]} index={0} />
                 <TaskItem type="abyss-dungeon" label="Abyssal Dungeon" isCheckBox={true} isDone={values.weekly.abyss[0]} index={0} />
-                <TaskItem type="ghost-ship" label="Ghost Ship" isCheckBox={true} isDone={values.weekly.ghostShip[0]} index={0}  />
+                <TaskItem type="ghost-ship" label="Ghost Ship" isCheckBox={true} isDone={values.weekly.ghostShip[0]} index={0} />
               </div>
             </div>
           </div>
         </main>
+        <Footer />
       </div>
     </AppContext.Provider>
   );
