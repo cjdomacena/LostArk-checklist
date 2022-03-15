@@ -2,7 +2,11 @@ import { useContext } from "react";
 import { AppContext } from "../../App";
 
 function Banner() {
-	const {setValues} = useContext(AppContext)
+	const {setValues} = useContext(AppContext);
+	const handleUpdateTime = () =>
+	{
+		return new Intl.DateTimeFormat('default', { month: 'long', weekday: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }).format(new Date())
+	}
 	const defaultValue = {
 		lastUpdated: handleUpdateTime(),
 		daily: {
