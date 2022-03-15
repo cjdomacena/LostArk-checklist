@@ -1,6 +1,7 @@
 {
   "name": "lostark-checklist",
   "version": "0.1.0",
+  "homepage": "https://cjdomacena.github.io/LostArk-checklist",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -12,6 +13,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -37,6 +40,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
+    "gh-pages": "^3.2.3",
     "postcss": "^8.4.8",
     "tailwindcss": "^3.0.23"
   }
