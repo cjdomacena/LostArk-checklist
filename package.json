@@ -1,7 +1,6 @@
 {
   "name": "lostark-checklist",
   "version": "0.1.0",
-  "homepage": "cjdomacena.github.io/lostark-checklist/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
