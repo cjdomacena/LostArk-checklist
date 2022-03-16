@@ -8,7 +8,7 @@ import unaWeekly from './../../assets/img/una-weekly.png'
 import abyssalDungeon from './../../assets/img/abyss-dungeon.png'
 import ghostShip from './../../assets/img/ghost-ship.png'
 import { useContext } from 'react';
-import { AppContext } from '../../App';
+import { AppContext } from '../../utils';
 
 
 function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0 })
@@ -33,7 +33,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0 }
 	switch (type){
 		case 'una-daily':
 				return (
-					<div className={`flex bg-una-daily w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } cursor-pointer text-white ${ values.daily.unaDaily[0] && values.daily.unaDaily[1] && 'line-through opacity-60'}`} role="button" onClick={() => isCheckBox && handleChange('daily', 'unaDaily')}>
+					<div className={`flex bg-una-daily w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } cursor-pointer text-white ${ values.daily.unaDaily[0] && values.daily.unaDaily[1] && values.daily.unaDaily[2] && 'line-through opacity-60'}`} role="button" onClick={() => isCheckBox && handleChange('daily', 'unaDaily')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={unaDaily} alt="Lost ark&rsquo;s una&rsquo;s task daily quest"/>
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>

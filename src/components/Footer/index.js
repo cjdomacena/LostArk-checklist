@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppContext } from "../../App";
+import { AppContext } from "../../utils";
 
 function Banner() {
 	const {setValues} = useContext(AppContext);
