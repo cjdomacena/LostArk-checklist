@@ -91,7 +91,7 @@ function App()
               <div className="flex justify-between items-center border-b-[1px] border-b-neutral-700 my-4">
                 <h4 className="font-medium">Daily</h4>
                 <div>
-                  <p className="text-sm text-neutral-400">{values.daily.completed} of 8 completed</p>
+                  <p className="text-sm text-neutral-400">{values.daily.completed} of 9 completed</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4 font-medium">
