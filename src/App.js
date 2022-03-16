@@ -29,7 +29,7 @@ function App()
     lastUpdated: handleUpdateTime(),
     daily: {
       completed: 0,
-      unaDaily: [false, false],
+      unaDaily: [false, false, false],
       guildDono: [false],
       guardianRaid: [false, false],
       fieldBoss: [false],
@@ -98,6 +98,7 @@ function App()
 
                 <TaskItem type="una-daily" label="Una&rsquo;s Daily #1" isCheckBox={true} isDone={values.daily.unaDaily[0]} index={0} />
                 <TaskItem type="una-daily" label="Una&rsquo;s Daily #2" isCheckBox={true} isDone={values.daily.unaDaily[1]} index={1} />
+                <TaskItem type="una-daily" label="Una&rsquo;s Daily #3" isCheckBox={true} isDone={values.daily.unaDaily[2]} index={2} />
 
                 <TaskItem type="guardian-raid" label="Guardian Raid" isCheckBox={true} isDone={values.daily.guardianRaid[0]} index={0} />
                 <TaskItem type="guardian-raid" label="Guardian Raid" isCheckBox={true} isDone={values.daily.guardianRaid[1]} index={1} />

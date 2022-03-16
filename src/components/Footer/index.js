@@ -11,7 +11,7 @@ function Banner() {
 		lastUpdated: handleUpdateTime(),
 		daily: {
 			completed: 0,
-			unaDaily: [false, false],
+			unaDaily: [false, false, false],
 			guildDono: [false],
 			guardianRaid: [false, false],
 			fieldBoss: [false],
