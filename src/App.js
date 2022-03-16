@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
 import BasicCheckList from "./pages/BasicCheckList";
 import CreateCheckList from "./pages/CreateCheckList";
-import { AppContext, handleUpdateTime } from "./utils";
+import { AppContext } from "./utils";
 function App()
 {
   const defaultValue = {
