@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import Popup from "../components/Popup";
 import { AppContext, getResetTime } from "../utils";
 
@@ -23,7 +24,7 @@ function CreateCheckList()
 			<Popup isOpen={isOpen} setItems={setCheckList} setIsOpen={setIsOpen} />
 			<div className="grid gap-y-2 mt-4">
 				{checkList.map((item, index) =>
-				(<div className="w-full p-4 bg-secondary flex justify-between items-center" key={`${item.title}-${index}`}>
+				(<div className="w-full p-4 bg-secondary flex justify-between items-center" key={item.id}>
 					<div>
 						<h1 className=" font-bold text-lg">{item.title}</h1>
 						<div className="mt-2 flex gap-x-2">
@@ -32,7 +33,7 @@ function CreateCheckList()
 						</div>
 					</div>
 					<div className="space-x-4 ">
-						<button type="button" className="text-blue-500 text-sm font-medium" >View</button>
+						<Link type="button" className="text-blue-500 text-sm font-medium" to={`/checklist/${item.id}`}>View</Link>
 						<button type="button" className="text-red-500 text-sm font-medium" onClick={() => handleDelete(index)}>Delete</button>
 					</div>
 

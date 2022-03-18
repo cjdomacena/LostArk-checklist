@@ -41,22 +41,43 @@ export const getResetTime = (timeFormat) =>
 }
 
 export const abyssalRaids = [
-	{
-		tier: 1,
-		dungeons: [
-			"Demon Beast Canyon",
-			"Necromancer's Origin",
-			"Hall of the Twisted Warlord",
-			"Hildebrandt Palace",
-		]
-	}, {
-		tier: 2,
-		dungeons: ["Road of Lament", "Forge of Fallen Pride", "Sea of Indolence", "Tranquil Karkosa", "Alaric's Sanctuary"]
 
-	}, {
-		tier: 3,
-		dungeons: ["Aira's Oculus", "Oreha Preveza"]
-	}
+	{ name: "Demon Beast Canyon (340)", isDone: false },
+	{ name: "Necromancer's Origin (340)", isDone: false },
+	{ name: "Hall of the Twisted Warlord (460)", isDone: false },
+	{ name: "Hildebrandt Palace (460)", isDone: false },
+	{ name: "Road of Lament (840)", isDone: false },
+	{ name: "Forge of Fallen Pride (840)", isDone: false },
+	{ name: "Sea of Indolence (960)", isDone: false },
+	{ name: "Tranquil Karkosa (960)", isDone: false },
+	{ name: "Alaric's Sanctuary (960)", isDone: false },
+	{ name: "Aira's Oculus - Normal (1325)", isDone: false },
+	{ name: "Aira's Oculus - Hard (1370)", isDone: false },
+	{ name: "Oreha Preveza - Normal (1325)", isDone: false },
+	{ name: "Oreha Preveza - Hard (1370)", isDone: false }
 ];
 
-export const ghostShips = ["460", "960", "1370"];
+export const ghostShips = [{name:"460", isDone:false},{name:"960", isDone:false}, {name:"1370", isDone:false}];
+
+export const guardianRaids = [
+	{ name: "Ur'nil", isDone: false },
+	{ name: "Lumerus", isDone: false },
+	{ name: "Icy Legoros", isDone: false },
+	{ name: "Vertus", isDone: false },
+	{ name: "Chromanium", isDone: false },
+	{ name: "Flame Fox Yoho", isDone: false },
+	{ name: "Nacrasena", isDone: false },
+	{ name: "Tytalos", isDone: false },
+	{ name: "Achates", isDone: false },
+	{ name: "Calventus", isDone: false },
+	{ name: "Dark Legoros", isDone: false },
+	{ name: "Helgaia", isDone: false },
+	{ name: "Alberhastic", isDone: false },
+	{ name: "Frost Helgaia", isDone: false },
+	{ name: "Lava Chromanium", isDone: false },
+	{ name: "Levanos", isDone: false },
+	{ name: "Heavy Armor Nacrasena", isDone: false },
+	{ name: "Igrexion", isDone: false },
+	{ name: "Night Fox Yoho", isDone: false },
+	{ name: "Velganos", isDone: false }
+]

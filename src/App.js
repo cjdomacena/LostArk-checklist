@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
 import BasicCheckList from "./pages/BasicCheckList";
 import CreateCheckList from "./pages/CreateCheckList";
+import CharacterCheckList from "./pages/CharacterCheckList"
 import { AppContext } from "./utils";
 function App()
 {
@@ -34,7 +35,8 @@ function App()
         <Navigation />
         <Routes >
           <Route path="/" element={<BasicCheckList />} />
-            <Route path="/checklist" element={<CreateCheckList />} />
+          <Route path="/checklist" element={<CreateCheckList />} />
+          <Route path="/checklist/:id" element={<CharacterCheckList/>}/>
         </Routes>
         <Footer />
       </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getRegion } from "../../utils";
+import { v4 as uuidv4 } from 'uuid';
 
 function Popup({ ...props })
 {
@@ -10,7 +11,7 @@ function Popup({ ...props })
 		e.preventDefault();
 		if (title.length > 1)
 		{
-			const newItem = { title: title, timeFormat: timeFormat, region: getRegion(timeFormat) }
+			const newItem = { id: uuidv4(), title: title, timeFormat: timeFormat, region: getRegion(timeFormat) }
 			props.setItems(prev => [...prev, newItem]);
 			props.setIsOpen(false)
 			setTimeFormat("ET")
@@ -27,7 +28,7 @@ function Popup({ ...props })
 					</div>
 					<div className="flex flex-col">
 						<label htmlFor="date" className="text-sm mb-2">Select Region</label>
-						<select type="s" id="date" className="pl-2 text-white h-8 bg-secondary" onChange={(e) => {setTimeFormat(e.target.value); console.log(e.target.value)}} value={timeFormat} required>
+						<select id="date" className="pl-2 text-white h-8 bg-secondary" onChange={(e) => { setTimeFormat(e.target.value); console.log(e.target.value) }} value={timeFormat} required>
 							<option value="DEFAULT" disabled>Choose A Region</option>
 							<option value="ET">US East</option>
 							<option value="PT">US West</option>
