@@ -25,7 +25,7 @@ function CharacterCheckList()
 		setCurrentList(temp[0]);
 		setCurrentOption(abyssalRaids)
 
-	}, [])
+	}, [checkList, id, navigate])
 
 	return (
 		<section className="container mx-auto text-white px-4 mt-12">
