@@ -1,85 +1,116 @@
-import { useState } from "react";
-import { abyssalRaids, ghostShips, guardianRaids } from "../../utils";
+import { useContext, useState } from "react";
+import { AppContext } from "../../utils";
+import TaskItem from "./../TaskItem"
 
-function Option({ items, type, setter, isOpen, setIsOpen })
+function Option({ isOpen, id, setIsOpen })
 {
 
-	const [options, setOptions] = useState(null);
-	const [currentOpt, setCurrentOpt] = useState("")
-	const [currentList, setCurrentList] = useState({ abyss: abyssalRaids, ghost: ghostShips, guardian: guardianRaids })
+	const { charCheckList, setCharCheckList } = useContext(AppContext);
+	const i = charCheckList.findIndex((el) => el.info.id === id)
+	const [currentList, setCurrentList] = useState([]);
+	const [abyss, setAbyss] = useState([{ name: "Demon Beast Canyon (340)", isDone: false },
+	{ name: "Necromancer's Origin (340)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Hall of the Twisted Warlord (460)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Hildebrandt Palace (460)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Road of Lament (840)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Forge of Fallen Pride (840)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Sea of Indolence (960)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Tranquil Karkosa (960)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Alaric's Sanctuary (960)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Aira's Oculus - Normal (1325)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Aira's Oculus - Hard (1370)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Oreha Preveza - Normal (1325)", isDone: false, type: "abyss-dungeon" },
+	{ name: "Oreha Preveza - Hard (1370)", isDone: false, type: "abyss-dungeon" }]);
+	const [guardian, setGuardian] = useState([{ name: "Ur'nil", isDone: false },
+	{ name: "Lumerus", isDone: false },
+	{ name: "Icy Legoros", isDone: false },
+	{ name: "Vertus", isDone: false },
+	{ name: "Chromanium", isDone: false },
+	{ name: "Flame Fox Yoho", isDone: false },
+	{ name: "Nacrasena", isDone: false },
+	{ name: "Tytalos", isDone: false },
+	{ name: "Achates", isDone: false },
+	{ name: "Calventus", isDone: false },
+	{ name: "Dark Legoros", isDone: false },
+	{ name: "Helgaia", isDone: false },
+	{ name: "Alberhastic", isDone: false },
+	{ name: "Frost Helgaia", isDone: false },
+	{ name: "Lava Chromanium", isDone: false },
+	{ name: "Levanos", isDone: false },
+	{ name: "Heavy Armor Nacrasena", isDone: false },
+	{ name: "Igrexion", isDone: false },
+	{ name: "Night Fox Yoho", isDone: false },
+	{ name: "Velganos", isDone: false }]);
+	const [ghost, setGhost] = useState([{ name: "Ghost Ship (460)", isDone: false }, { name: "Ghost Ship (960)", isDone: false }, { name: "Ghost Ship (1370)", isDone: false }]);
 
-	const handleSelect = (e) =>
+	const handleAdd = (item, index, type) =>
 	{
-		let current = ""
-		switch (e.target.value)
+		let t;
+		let setter;
+		if (type === "abyss")
 		{
-			case "abyssalDungeon":
-				setOptions(abyssalRaids);
-				current = "abyss";
-				break;
-			case "guardianRaids":
-				setOptions(guardianRaids);
-				current = "guardian";
-				break;
-			case "ghostShip":
-				setOptions(ghostShips);
-				current = "ghost"
-				break;
-			default:
-				setOptions(abyssalRaids);
-				current = "abyss"
-				break;
+			t = abyss;
+			t[index].isDone = !t[index].isDone;
+			setter = setAbyss;
+		} else if (type === "ghost")
+		{
+			t = ghost;
+			t[index].isDone = !t[index].isDone;
+			setter = setGhost;
+		} else
+		{
+			let t = guardian;
+			t[index].isDone = !t[index].isDone;
+			setter = setGuardian;
 		}
-		setCurrentOpt(current)
-	}
+		setter(t);
 
-	const handleChange = (e, index, option) =>
-	{
-		let temp = { ...currentList };
-		temp[option][index].isDone = e.target.checked;
-		setCurrentList([])
-		setCurrentList(temp)
-		console.log(currentList)
+
+		let tempList = currentList;
+		let indexList = tempList.findIndex((el) => el.name === item.name);
+		if (indexList >= 0)
+		{
+			tempList.splice(indexList, 1);
+		} else
+		{
+			let temp = item;
+			temp.isDone = true;
+			tempList.push(temp)
+		}
+		setCurrentList(tempList);
 	}
 
 	const handleSave = (e) =>
 	{
 		e.preventDefault();
-		setter(currentList)
+		let temp = charCheckList;
+
+		temp[i].checkList = temp[i].checkList.length > 0 ? [...temp[i].checkList, currentList] : [currentList]
+		setCharCheckList(temp);
 		setIsOpen(false);
 	}
 
-	return (isOpen &&
-		<div className="w-full h-full mx-auto backdrop-blur-sm absolute left-0 top-0 grid place-items-center z-50">
-			<div className="flex flex-col mt-4 xl:w-1/2 lg:w-1/2 w-4/4  h-auto p-4 bg-primary border border-secondary">
-				<div className=" my-4 flex flex-col">
-					<label htmlFor="column_name">Enter Column Title</label>
-					<input type="text" id="column_name" className="bg-secondary text-white pl-1 h-8" placeholder="e.g. Daily, Weekly"/>
-				</div>
-				<div className=" my-4 flex flex-col">
-					<label htmlFor="options">Select Type</label>
-					<select id="options" className="bg-secondary h-8" onClick={handleSelect}>
-						<option value="DEFAULT" disabled>Select Type</option>
-						<option value="abyssalDungeon">Abyssal Dungeon</option>
-						<option value="guardianRaids">Guardian Raid</option>
-						<option value="ghostShip">Ghost Ship</option>
-					</select>
-				</div>
-				{options && <fieldset id="option-checklist" multiple className="border-2 border-secondary text-sm p-4 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4" >
-					<legend className="font-bold">Abyssal Raids</legend>
-					{options.map((item, index) =>
-					(<div key={item.name}>
-						<input type="checkbox" value={item.name} name={type} id={item.name} onChange={(e) => { handleChange(e, index, currentOpt) }} key={item.name} checked={item.isDone} />
-						<label className="capitalize ml-1" htmlFor={item.name}>{item.name}</label>
-					</div>)
-					)}
-				</fieldset>}
-				<div className="grid grid-cols-2 gap-x-4">
-					<button type="submit" className="px-8 py-1 bg-green-500" onClick={handleSave}>Save</button>
-					<button className="px-8 py-1 bg-gray-500" onClick={() => setIsOpen(false)}>Cancel</button>
-				</div>
-			</div>
 
-		</div>)
+	return (isOpen &&
+		<form>
+			<div className="w-full h-full mx-auto backdrop-blur-sm absolute left-0 top-0 grid place-items-center z-50">
+				<div className="border-2 border-main p-4 space-y-4 bg-secondary xl:w-2/4 lg:w-2/4 w-full">
+					<div className="space-y-2">
+						<h1 className="text-sm font-bold">Abyssal Dungeon</h1>
+						<ul className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-2">
+							{abyss.map((item, index) => <li key={item.name} role="button" className={`${ item.isDone ? "opacity-60" : "hover:opacity-60" }`} onClick={() => handleAdd(item, index, "abyss")}><TaskItem label={item.name} type="abyss-dungeon" />{console.log("Renders")}</li>)}
+						</ul>
+					</div>
+					<div className="space-y-2">
+						<h1 className="text-sm font-bold">Ghost Ship</h1>
+						<ul className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-2">
+							{ghost.map((item) => <li key={item.name} className={`${ item.isDone ? "opacity-60" : "hover:opacity-60" }`} onClick={() => handleAdd(item, i, "ghost")}><TaskItem label={item.name} type="ghost-ship" />{console.log("Render")}</li>)}
+						</ul>
+					</div>
+				</div>
+				<button onClick={handleSave}>Save</button>
+				<button onClick={() => setIsOpen(false)}>Close</button>
+			</div>
+		</form>)
 }
 export default Option;

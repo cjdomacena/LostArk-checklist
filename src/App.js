@@ -27,16 +27,16 @@ function App()
     }
   }
   const [values, setValues] = useState(defaultValue)
-  const [checkList, setCheckList] = useState([]);
+  const [charCheckList, setCharCheckList] = useState([]);
 
   return (
-    <AppContext.Provider value={{ values, setValues, checkList, setCheckList }}>
+    <AppContext.Provider value={{ values, setValues, charCheckList, setCharCheckList }}>
       <div className="App  w-full h-screen">
         <Navigation />
         <Routes >
           <Route path="/" element={<BasicCheckList />} />
           <Route path="/checklist" element={<CreateCheckList />} />
-          <Route path="/checklist/:id" element={<CharacterCheckList/>}/>
+          <Route path="/checklist/:id" element={<CharacterCheckList />} />
         </Routes>
         <Footer />
       </div>

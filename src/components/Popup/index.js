@@ -1,20 +1,21 @@
-import { useState } from "react";
-import { getRegion } from "../../utils";
+import { useContext, useState } from "react";
+import { AppContext, getRegion } from "../../utils";
 import { v4 as uuidv4 } from 'uuid';
 
 function Popup({ ...props })
 {
 	const [title, setTitle] = useState("");
 	const [timeFormat, setTimeFormat] = useState("ET");
+	const { setCharCheckList } = useContext(AppContext);
 	const handleSubmit = (e) =>
 	{
 		e.preventDefault();
 		if (title.length > 1)
 		{
 			const newItem = { id: uuidv4(), title: title, timeFormat: timeFormat, region: getRegion(timeFormat) }
-			props.setItems(prev => [...prev, newItem]);
 			props.setIsOpen(false)
 			setTimeFormat("ET")
+			setCharCheckList(prev => [...prev, {info: {...newItem}, checkList: {}}])
 		}
 	}
 	return props.isOpen ? (

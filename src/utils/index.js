@@ -57,7 +57,7 @@ export const abyssalRaids = [
 	{ name: "Oreha Preveza - Hard (1370)", isDone: false }
 ];
 
-export const ghostShips = [{name:"460", isDone:false},{name:"960", isDone:false}, {name:"1370", isDone:false}];
+export const ghostShips = [{name:"Ghost Ship (460)", isDone:false},{name:"Ghost Ship (960)", isDone:false}, {name:"Ghost Ship (1370)", isDone:false}];
 
 export const guardianRaids = [
 	{ name: "Ur'nil", isDone: false },

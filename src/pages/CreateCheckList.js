@@ -5,14 +5,14 @@ import { AppContext, getResetTime } from "../utils";
 
 function CreateCheckList()
 {
-	const { checkList, setCheckList } = useContext(AppContext);
+	const { setCharCheckList, setCheckList, charCheckList } = useContext(AppContext);
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleDelete = (index) =>
 	{
-		const newItems = [...checkList];
+		const newItems = [...charCheckList];
 		newItems.splice(index, 1);
-		setCheckList(newItems);
+		setCharCheckList(newItems);
 	};
 
 	return (
@@ -23,20 +23,19 @@ function CreateCheckList()
 			</div>
 			<Popup isOpen={isOpen} setItems={setCheckList} setIsOpen={setIsOpen} />
 			<div className="grid gap-y-2 mt-4">
-				{checkList.map((item, index) =>
-				(<div className="w-full p-4 bg-secondary flex justify-between items-center" key={item.id}>
+				{charCheckList.map((item, index) =>
+				(<div className="w-full p-4 bg-secondary flex justify-between items-center" key={item.info.id}>
 					<div>
-						<h1 className=" font-bold text-lg">{item.title}</h1>
+						<h1 className=" font-bold text-lg">{item.info.title}</h1>
 						<div className="mt-2 flex gap-x-2">
-							<p className="text-xs">{item.region}</p>
-							<p className="text-xs">Daily Reset: {getResetTime(item.timeFormat)} - {item.timeFormat}</p>
+							<p className="text-xs">{item.info.region}</p>
+							<p className="text-xs">Daily Reset: {getResetTime(item.info.timeFormat)} - {item.info.timeFormat}</p>
 						</div>
 					</div>
 					<div className="space-x-4 ">
-						<Link type="button" className="text-blue-500 text-sm font-medium" to={`/checklist/${item.id}`}>View</Link>
+						<Link type="button" className="text-blue-500 text-sm font-medium" to={`/checklist/${item.info.id}`} state={{index:index}}>View</Link>
 						<button type="button" className="text-red-500 text-sm font-medium" onClick={() => handleDelete(index)}>Delete</button>
 					</div>
-
 				</div>)
 				)}
 			</div>
