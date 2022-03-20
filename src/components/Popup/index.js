@@ -15,7 +15,7 @@ function Popup({ ...props })
 			const newItem = { id: uuidv4(), title: title, timeFormat: timeFormat, region: getRegion(timeFormat) }
 			props.setIsOpen(false)
 			setTimeFormat("ET")
-			setCharCheckList(prev => [...prev, {info: {...newItem}, checkList: {}}])
+			setCharCheckList(prev => [...prev, {info: {...newItem}, tasks:[]}])
 		}
 	}
 	return props.isOpen ? (
@@ -25,7 +25,7 @@ function Popup({ ...props })
 				<div className="flex flex-col p-4 gap-y-4">
 					<div className="flex flex-col">
 						<label htmlFor="title" className="text-sm mb-2">Enter title</label>
-						<input type="text" placeholder="e.g daily, weekly, character name" id="title" className="pl-2 text-white h-8 bg-secondary" onChange={(e) => setTitle(e.target.value)} required />
+						<input type="text" placeholder="e.g. character name" id="title" className="pl-2 text-white h-8 bg-secondary" onChange={(e) => setTitle(e.target.value)} required />
 					</div>
 					<div className="flex flex-col">
 						<label htmlFor="date" className="text-sm mb-2">Select Region</label>

@@ -11,7 +11,7 @@ import { useContext } from 'react';
 import { AppContext } from '../../utils';
 
 
-function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0 })
+function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, isAdded})
 {
 	const {values,setValues} = useContext(AppContext)
 
@@ -90,7 +90,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0 }
 				);
 		case 'abyss-dungeon':
 				return (
-					<div className={`flex bg-abyss w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } text-white ${ values.weekly.abyss[0] && 'line-through opacity-60'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('weekly', 'abyss')}>
+					<div className={`flex bg-abyss w-full p-2 gap-x-2 text-sm items-center ${ (isDone || isAdded) && 'opacity-60' } text-white ${ values.weekly.abyss[0] && 'line-through opacity-60'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('weekly', 'abyss')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={abyssalDungeon} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>

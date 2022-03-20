@@ -1,19 +1,34 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Popup from "../components/Popup";
 import { AppContext, getResetTime } from "../utils";
 
 function CreateCheckList()
 {
-	const { setCharCheckList, setCheckList, charCheckList } = useContext(AppContext);
+	const { setCharCheckList, charCheckList } = useContext(AppContext);
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleDelete = (index) =>
 	{
-		const newItems = [...charCheckList];
-		newItems.splice(index, 1);
+		console.log(index)
+		let newItems = charCheckList.filter((el) => el.info.id !== charCheckList[index].info.id);
+		if (newItems.length < 1)
+		{
+			localStorage.removeItem("checklists");
+		} else
+		{
+			localStorage.setItem("checklists", JSON.stringify(charCheckList));
+		}
 		setCharCheckList(newItems);
-	};
+ 	};
+
+	useEffect(() => {
+		
+		if (localStorage.getItem("checklists")) {
+			setCharCheckList(JSON.parse(localStorage.getItem('checklists')))
+		}
+
+	},[setCharCheckList])
 
 	return (
 		<section className="container mx-auto text-white px-4 mt-12">
@@ -21,7 +36,7 @@ function CreateCheckList()
 				<h1>Checklist</h1>
 				<button className="px-6 py-2 bg-green-500" onClick={() => setIsOpen(!isOpen)}>Add New</button>
 			</div>
-			<Popup isOpen={isOpen} setItems={setCheckList} setIsOpen={setIsOpen} />
+			<Popup isOpen={isOpen}  setIsOpen={setIsOpen} />
 			<div className="grid gap-y-2 mt-4">
 				{charCheckList.map((item, index) =>
 				(<div className="w-full p-4 bg-secondary flex justify-between items-center" key={item.info.id}>

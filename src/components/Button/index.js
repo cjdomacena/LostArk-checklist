@@ -33,7 +33,6 @@ function Button({ ...props })
 	{
 		setValues(defaultValue);
 		localStorage.setItem('lostArk-todos', JSON.stringify(defaultValue))
-		console.log(values)
 	}
 	
 

@@ -32,10 +32,11 @@ function Banner() {
 				<button className="text-sm underline px-2 py-1" onClick={() => {
 					setValues(defaultValue);
 					localStorage.removeItem('lostArk-todos');
-					alert('Successfully removed from local storage')
+					localStorage.removeItem('checklists');
+					alert('Successfully removed from local storage');
+					window.location.reload();
 					}}>Remove from local storage</button>
 			</div>
-
 		</footer>
 	)
 }
