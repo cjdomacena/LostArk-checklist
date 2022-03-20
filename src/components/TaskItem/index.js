@@ -33,7 +33,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 	switch (type){
 		case 'una-daily':
 				return (
-					<div className={`flex bg-una-daily w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } cursor-pointer text-white ${ values.daily.unaDaily[0] && values.daily.unaDaily[1] && values.daily.unaDaily[2] && 'line-through opacity-60'}`} role="button" onClick={() => isCheckBox && handleChange('daily', 'unaDaily')}>
+					<div className={`flex bg-una-daily w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'line-through' } cursor-pointer text-white ${ values.daily.unaDaily[0] && values.daily.unaDaily[1] && values.daily.unaDaily[2] && 'line-through'}`} role="button" onClick={() => isCheckBox && handleChange('daily', 'unaDaily')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={unaDaily} alt="Lost ark&rsquo;s una&rsquo;s task daily quest"/>
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
@@ -41,7 +41,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 				);
 		case 'guild-dono':
 				return (
-					<div className={`flex bg-guild w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-90' } cursor-pointer text-white ${ values.daily.guildDono[0] && 'line-through opacity-60'}`} role="button" onClick={() => isCheckBox && handleChange('daily', 'guildDono')}>
+					<div className={`flex bg-guild w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'line-through' } cursor-pointer text-white ${ values.daily.guildDono[0] && 'line-through'}`} role="button" onClick={() => isCheckBox && handleChange('daily', 'guildDono')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={guildDono} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
@@ -49,7 +49,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 				);
 		case 'guardian-raid':
 				return (
-					<div className={`flex bg-guardian w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } text-white ${ values.daily.guardianRaid[0] && values.daily.guardianRaid[1] &&  'line-through opacity-60'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('daily', 'guardianRaid')}>
+					<div className={`flex bg-guardian w-full p-2 gap-x-2 text-sm items-center ${ (isDone || isAdded) && 'line-through' } text-white ${ values.daily.guardianRaid[0] && values.daily.guardianRaid[1] &&  'line-through'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('daily', 'guardianRaid')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={guardianRaid} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
@@ -57,7 +57,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 				);	
 		case 'field-boss':
 				return (
-					<div className={`flex bg-field-boss w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } text-white ${ values.daily.fieldBoss[0] && 'line-through opacity-60'}cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('daily', 'fieldBoss')}>
+					<div className={`flex bg-field-boss w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'line-through' } text-white ${ values.daily.fieldBoss[0] && 'line-through'}cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('daily', 'fieldBoss')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={fieldBoss} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
@@ -65,7 +65,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 				);
 		case 'rapport':
 				return (
-					<div className={`flex bg-rapport w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } text-white ${ values.daily.rapport[0] && 'line-through opacity-60'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('daily', 'rapport')}>
+					<div className={`flex bg-rapport w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'line-through' } text-white ${ values.daily.rapport[0] && 'line-through'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('daily', 'rapport')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={rapport} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
@@ -73,7 +73,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 				);
 		case 'chaos-gate':
 				return (
-					<div className={`flex bg-chaos-gate w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } text-white ${ values.daily.chaosGate[0] && 'line-through opacity-60'}  cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('daily', 'chaosGate')}>
+					<div className={`flex bg-chaos-gate w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'line-through' } text-white ${ values.daily.chaosGate[0] && 'line-through'}  cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('daily', 'chaosGate')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={chaosGate} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
@@ -82,7 +82,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 
 		case 'una-weekly':
 				return (
-					<div className={`flex bg-una-weekly w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } text-white ${ values.weekly.unaWeekly[0] && 'line-through opacity-60'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('weekly', 'unaWeekly')}>
+					<div className={`flex bg-una-weekly w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'line-through' } text-white ${ values.weekly.unaWeekly[0] && 'line-through'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('weekly', 'unaWeekly')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={unaWeekly} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
@@ -90,7 +90,7 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 				);
 		case 'abyss-dungeon':
 				return (
-					<div className={`flex bg-abyss w-full p-2 gap-x-2 text-sm items-center ${ (isDone || isAdded) && 'opacity-60' } text-white ${ values.weekly.abyss[0] && 'line-through opacity-60'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('weekly', 'abyss')}>
+					<div className={`flex bg-abyss w-full p-2 gap-x-2 text-sm items-center ${ (isDone || isAdded) && 'line-through' } text-white ${ values.weekly.abyss[0] && 'line-through'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('weekly', 'abyss')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={abyssalDungeon} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
@@ -98,14 +98,14 @@ function TaskItem({ type, label, isCheckBox = false, isDone = false, index = 0, 
 				);
 		case 'ghost-ship':
 				return (
-					<div className={`flex bg-ghost w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'opacity-60' } text-white ${ values.weekly.ghostShip[0] && 'line-through opacity-60'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('weekly', 'ghostShip')}>
+					<div className={`flex bg-ghost w-full p-2 gap-x-2 text-sm items-center ${ isDone && 'line-through' } text-white ${ values.weekly.ghostShip[0] && 'line-through'} cursor-pointer`} role="button" onClick={() => isCheckBox && handleChange('weekly', 'ghostShip')}>
 						{isCheckBox && <input type="checkbox" checked={isDone} readOnly />}
 						<img src={ghostShip} alt="Lost ark&rsquo;s guild donation" />
 						<h4 className={`text-white ${ isDone && 'line-through'}`}>{label}</h4>
 					</div>
 				);
 		default: 
-			return "";
+			break;
 	}
 }
 

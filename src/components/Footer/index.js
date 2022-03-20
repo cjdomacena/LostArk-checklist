@@ -35,7 +35,7 @@ function Banner() {
 					localStorage.removeItem('checklists');
 					alert('Successfully removed from local storage');
 					window.location.reload();
-					}}>Remove from local storage</button>
+					}} tabIndex={-1} >Remove from local storage</button>
 			</div>
 		</footer>
 	)

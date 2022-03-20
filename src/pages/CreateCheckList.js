@@ -10,7 +10,6 @@ function CreateCheckList()
 
 	const handleDelete = (index) =>
 	{
-		console.log(index)
 		let newItems = charCheckList.filter((el) => el.info.id !== charCheckList[index].info.id);
 		if (newItems.length < 1)
 		{
@@ -38,6 +37,7 @@ function CreateCheckList()
 			</div>
 			<Popup isOpen={isOpen}  setIsOpen={setIsOpen} />
 			<div className="grid gap-y-2 mt-4">
+				{charCheckList.length < 1 && <div className="px-4 bg-neutral-900 w-full h-12 grid place-items-center text-gray-400">Click or Press "Add New" to Add a character</div>}
 				{charCheckList.map((item, index) =>
 				(<div className="w-full p-4 bg-secondary flex justify-between items-center" key={item.info.id}>
 					<div>
